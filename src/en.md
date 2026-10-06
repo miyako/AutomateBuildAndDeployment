@@ -685,7 +685,6 @@ Here’s a brief recap of the demo steps:
 
 1. **Push the 4D project to GitHub** to enable CI with GitHub Actions.
 2. **Set up a self-hosted Windows runner** in GitHub to run builds locally.
-
 3. **Create two workflows:**
     - Compile workflow to check for compile success using **compileMethod.**
     - Build workflow to build the client/server app using **buildMethod.**
