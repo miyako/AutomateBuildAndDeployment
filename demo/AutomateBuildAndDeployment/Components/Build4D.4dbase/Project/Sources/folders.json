@@ -1,0 +1,28 @@
+{
+	". .  classes": {
+		"classes": [
+			"_core",
+			"Client",
+			"CompiledProject",
+			"Component",
+			"Server",
+			"Standalone"
+		]
+	},
+	". .  methods": {
+		"groups": [
+			"coop -> preempt"
+		],
+		"methods": [
+			"onError",
+			"onStartup"
+		]
+	},
+	"coop -> preempt": {
+		"methods": [
+			"quit4D_coop",
+			"showOnDisk_coop"
+		]
+	},
+	"trash": {}
+}
