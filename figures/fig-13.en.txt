@@ -1,0 +1,26 @@
+Compile 4D Project
+Q Filter workflow runs
+Actions
+New workflow
+compile.yml
+All workflows
+Build 4D Project
+1 workflow run
+Branch v
+Event
+Status
+Actor
+Compile 4D Project
+This workflow has a workflow_dispatch event trigger.
+Run workflow
+Management
+& Caches
+@ Compile 4D Project
+2 minutes ago
+© Attestations
+main
+© 35s
+Compile 4D Project #1: Manually run by Soukaina-bachikh
+Runners
+@ Usage metrics
+Performance metrics

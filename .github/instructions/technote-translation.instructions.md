@@ -39,12 +39,14 @@ The workflow and checkpoints are in `.github/copilot-instructions.md`. This file
 | `heading.fonts` | Substrings of font names that mark headings; with `heading.min_size` |
 | `heading.levels_by_x` | `{"x": level}`: heading level by left x (nearest within 6 pt); otherwise `default_level` |
 | `code.colors` | Hex colours of syntax-highlighted code spans (Word exports code as coloured text) |
-| `code.fonts` | Monospace font substrings; `code.indent` = minimum x offset for code continuation lines |
+| `code.fonts` | Monospace font substrings; `code.indent` = minimum x offset for code continuation lines (`null`: code is recognised by font/colour only, for documents whose code sits at the body x) |
 | `bullets.fonts` / `strip_fonts` | Glyph fonts that mark list items / fonts of separator spans to drop |
 | `caption.italic`, `caption.min_x` | Captions are italic lines starting right of `min_x` |
 | `table.size` | Font size used only by table cells (or null) |
 | `paragraph.gap`, `short_line_x1` | Start a new paragraph after a vertical gap > `gap`, or after a short line ending in `.` or `:` |
 | `ocr.psm`, `min_conf`, `noise` | Tesseract page-segmentation mode, word confidence threshold, regex of junk lines |
+| `figures.min_width_pt` | Images narrower than this (inline emoji/icons) are not extracted as figures |
+| `figures.rasterize_overlays` | When boxes or text are drawn over a picture (red highlights, step numbers), render that page region instead of extracting the raw image; text inside it is dropped from the Markdown |
 | `figure_fonts` | `{light, regular, bold: ["path#index", ...]}`: overrides the per-platform defaults |
 
 `make inspect` derives most of these from a style histogram of the body pages:
@@ -73,6 +75,8 @@ monospace font for code instead of colours, `code.colors` can stay empty.
   `![caption](fig-NN)` placed where the image sits.
   - `layout/fig-NN.json` stores `source`, `page`, `width_pt` (the placed width, reused in the rebuild) and
     `localize`, plus one `items[]` entry per OCR line with its `box`.
+- Cropped pictures (Word crops with a clip path around a larger placement) are cut to their visible part;
+  `tools/pdfclip.py` tracks the clip in the page content stream.
 - Vector diagrams (drawn with PDF paths, not images) are **not** extracted. `inspect` lists pages with many
   drawings. If they contain text, ask the user: either rasterise the region with `page.get_pixmap(clip=…)` into a
   new figure, or leave it.

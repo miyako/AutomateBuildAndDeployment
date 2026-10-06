@@ -1,0 +1,21 @@
+Actions
+Compile 4D Project
+Q Filter workflow runs
+New workflow
+compile.yml
+All workflows
+1 0 workflow runs
+Event
+Status v
+Branch
+Actor
+This workflow has a workflow_dispatch event trigger.
+Run workflow
+Management
+& Caches
+Use workflow from
+© Attestations
+Branch: main +
+Runners
+Usage metrics
+Performance metrics

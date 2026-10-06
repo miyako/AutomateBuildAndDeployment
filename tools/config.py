@@ -27,6 +27,8 @@ DEFAULTS = {
     "table": {"size": None},        # font size used only by table cells, or null
     "paragraph": {"gap": 3, "short_line_x1": 470},
     "ocr": {"psm": 11, "min_conf": 30, "noise": r"^[E ]+$"},
+    "figures": {"min_width_pt": 0,           # images narrower than this (inline icons) are skipped
+                "rasterize_overlays": False},  # render the page region when drawings/text sit on an image
     "figure_fonts": {},             # {"light"|"regular"|"bold": [path or path#index, ...]}
     "demo_dir": "demo",
 }

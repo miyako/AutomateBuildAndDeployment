@@ -1,0 +1,17 @@
+build
+Q Search logs
+succeeded 9 minutes ago in 3m 39s
+Y @ Build with Tool4D
+3m 15s
+54
+55
+All builds succeeded!
+56
+Check build result
+> Run $content
+Get-Content build_output.txt -Raw
+13
+ae.. Build log confirms successful execution.
+Post Checkout repository
+6s
+Complete job

@@ -1,0 +1,8 @@
+G serverApp
+File
+Edit
+Window Help
+Monitor
+Users (1)
+Proces
+4D User

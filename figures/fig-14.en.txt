@@ -1,0 +1,28 @@
+compile
+Q Search logs
+succeeded now in 31s
+v Compile with Tool4D
+6s
+con Cup
+log-level=@ --user-param --skip
+> compile output.txt
+onstartup --startup-method “compilemethod"
+Check compilation result
+> Run $content = Get-Content -Raw
+15
+15
+6Y,, Tool4D Output:
+16
+Compilation starts
+17
+Compilation returns
+18
+19
+"success": true,
+20
+"errors": []
+21
+22
+4e.. Compilation succeeded with no errors!
+v Post Checkout repository
+6s

@@ -1,0 +1,7 @@
+IPS C:\Users\Admin\actions-runner\actions-runner> ./config.cmd --url
+token
+FOOT TI
+Self-hosted runner registration
+Authentication
+Connected to GitHub
+Runner Registration

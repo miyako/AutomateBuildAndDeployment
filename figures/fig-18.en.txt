@@ -1,0 +1,57 @@
+compile
+Q search logs
+Pay
+failed 1 hour ago in 29s
+Check com}
+ation result
+18
+Compilation returns
+19
+20
+21
+"succes:
+false,
+22
+“errors”
+23
+"message": “Syntax error”,
+24
+25
+“isError”: true,
+26
+“code”: {
+27
+“type”:
+28
+"methodName": “host_startup”,
+“path”: “host_startup”,
+29
+30
+"file": “[object File]”
+31
+32
+“Line”: 3,
+33
+“LineInFile": 4
+34
+35
+36
+“message”: “The variable TYPO has not been explicitly declared.”,
+37
+“isError”: true,
+38
+"code": {
+39
+“type”:
+40
+“methodName”: “host_startup”,
+41
+path": “host_startup™,
+42
+file": “[object
+43
+44
+“line”: 3,
+45
+“LineInFile’
+4
