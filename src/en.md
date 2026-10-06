@@ -374,20 +374,20 @@ name: Build 4D Application
 # Define the trigger: this workflow runs on every push to the 'main' branch
 on:
   push:
-    branches: - main
+    branches: [ main ]
 
 # Define the job(s) to run
 jobs:
   build:  # Job name (can be any identifier)
     runs-on: windows-latest   # Specifies the OS/environment for the job runner
-  steps:
-    # Step 1: Checkout the code from the repository
-    - name: Checkout repository
-      uses: actions/checkout@v3    # Official GitHub Action to clone the repo
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3    # Official GitHub Action to clone the repo
 
-    # Step 2: Run a shell command as a placeholder for the actual build process
-    - name: Build step
-      run: echo "Running build steps..."  # Replace this with actual build commands (e.g., Tool4D)
+      # Step 2: Run a shell command as a placeholder for the actual build process
+      - name: Build step
+        run: echo "Running build steps..."  # Replace this with actual build commands (e.g., Tool4D)
 ```
 
 ## Integrating Build4D into CI/CD
