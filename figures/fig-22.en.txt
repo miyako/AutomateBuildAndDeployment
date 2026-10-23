@@ -1,8 +1,5 @@
 serverApp-clientApp
-File
-Edit
-Mode
-Help
+File Edit Mode Help
 Application
 clientApp
 Hello Build4D !

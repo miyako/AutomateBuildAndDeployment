@@ -1,7 +1,7 @@
 Methods
 Project Methods
 Home
-Y Component Methods
+Component Methods
 > DP AD Labels
 > Db 4D Netkit (cs.NetKit)
 Tables
@@ -15,9 +15,10 @@ Forms
 Methods
 a myComponent
 Database Methods
-‘Commands
+Commands
 Classes
 Triggers
 Project Form Methods
 Constants
 Table Form Methods
+Explorer

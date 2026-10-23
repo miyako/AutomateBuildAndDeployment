@@ -1,7 +1,5 @@
 G serverApp
-File
-Edit
-Window Help
+File Edit Window Help
 Monitor
 Users (1)
 Proces

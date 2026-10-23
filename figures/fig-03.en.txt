@@ -2,18 +2,18 @@ Components
 Desktop
 testBuildComponent
 Components
-@® New
+New
 0
 2
-W Sort »
+Sort
 View
 0
 Name
 Date modified
 Type
-@ Home
+Home
 myComponent.4dbase
 6/23/2025 4:45 PM
 File folder
-WR Gallery
+Gallery
 Soukaina - 4D

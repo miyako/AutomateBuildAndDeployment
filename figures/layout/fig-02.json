@@ -2,7 +2,7 @@
  "source": "fig-02.png",
  "page": 6,
  "width_pt": 468.0,
- "localize": false,
+ "localize": true,
  "items": [
   {
    "box": [
@@ -11,7 +11,16 @@
     74,
     21
    ],
-   "align": "center"
+   "align": "left",
+   "carry": [
+    [
+     517,
+     80,
+     201,
+     25
+    ]
+   ],
+   "scale": 1.12
   },
   {
    "box": [
@@ -24,48 +33,70 @@
   },
   {
    "box": [
-    28,
-    147,
-    95,
-    31
+    65,
+    157,
+    35,
+    13
    ],
-   "align": "center"
+   "align": "left",
+   "carry": [
+    [
+     110,
+     161,
+     8,
+     4
+    ]
+   ],
+   "carry_dx": -4,
+   "scale": 1.0
   },
   {
    "box": [
-    610,
-    154,
-    87,
-    18
+    647,
+    157,
+    31,
+    13
    ],
-   "align": "center"
+   "align": "left",
+   "carry": [
+    [
+     689,
+     161,
+     8,
+     4
+    ]
+   ],
+   "carry_dx": -4,
+   "scale": 1.0
   },
   {
    "box": [
     777,
     157,
-    56,
+    38,
     13
    ],
-   "align": "center"
+   "align": "left",
+   "carry": [
+    [
+     825,
+     161,
+     8,
+     4
+    ]
+   ],
+   "carry_dx": -4,
+   "scale": 1.0
   },
   {
    "box": [
-    885,
-    161,
-    24,
-    5
+    81,
+    213,
+    54,
+    19
    ],
-   "align": "center"
-  },
-  {
-   "box": [
-    52,
-    209,
-    82,
-    24
-   ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -74,7 +105,8 @@
     46,
     13
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -83,7 +115,8 @@
     111,
     14
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -92,7 +125,9 @@
     37,
     17
    ],
-   "align": "center"
+   "align": "left",
+   "dy": -2,
+   "scale": 1.12
   },
   {
    "box": [
@@ -101,7 +136,8 @@
     30,
     13
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -124,11 +160,12 @@
   {
    "box": [
     718,
-    261,
+    260,
     162,
     15
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -137,7 +174,8 @@
     77,
     14
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -151,11 +189,12 @@
   {
    "box": [
     718,
-    304,
+    303,
     162,
     15
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -164,7 +203,8 @@
     64,
     14
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -174,6 +214,16 @@
     13
    ],
    "align": "center"
+  },
+  {
+   "box": [
+    82,
+    358,
+    66,
+    18
+   ],
+   "align": "left",
+   "scale": 1.12
   }
  ]
 }

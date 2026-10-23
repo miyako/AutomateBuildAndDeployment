@@ -1,0 +1,19 @@
+Components
+デスクトップ
+testBuildComponent
+Components
+新規作成
+0
+2
+並べ替え
+表示
+0
+名前
+更新日時
+種類
+ホーム
+myComponent.4dbase
+2025/06/23 16:45
+ファイル フォルダー
+ギャラリー
+Soukaina - 4D

@@ -149,7 +149,17 @@ def render(name, layout, en, ja):
             fg = tuple(item["fg"])
         size_en = estimate_size(draw, src, box)
         weight = item.get("weight", "regular")
-        left, right = free_span(img, box, bg)
+        carry = [(c, img.crop((c[0], c[1], c[0] + c[2], c[1] + c[3]))) for c in item.get("carry", [])]
+        span = box
+        if carry:
+            x0 = min([box[0]] + [c[0] for c, _ in carry])
+            y0 = min([box[1]] + [c[1] for c, _ in carry])
+            x1 = max([box[0] + box[2]] + [c[0] + c[2] for c, _ in carry])
+            y1 = max([box[1] + box[3]] + [c[1] + c[3] for c, _ in carry])
+            span = [x0, y0, x1 - x0, y1 - y0]
+        left, right = free_span(img, span, bg)
+        right -= span[0] + span[2] - (box[0] + box[2])
+        item = dict(item, _carry=carry)
         jobs.append((item, src, dst, box, bg, fg, weight, left, right, size_en))
     snapped = snap_sizes([j[-1] for j in jobs])
     jobs = [j[:-1] + (sz,) for j, sz in zip(jobs, snapped)]
@@ -157,6 +167,12 @@ def render(name, layout, en, ja):
         x, y, w, h = box
         p = item.get("erase_pad", 3)
         draw.rectangle([x - p, y - p, x + w + p, y + h + p], fill=bg)
+        for (cx0, cy0, cw, ch), _ in item["_carry"]:
+            draw.rectangle([cx0 - 1, cy0 - 1, cx0 + cw + 1, cy0 + ch + 1], fill=bg)
+    for shape in layout.get("shapes", []):
+        x, y, w, h = shape["rect"]
+        draw.rectangle([x, y, x + w - 1, y + h - 1], fill=tuple(shape["fill"]),
+                       outline=tuple(shape["outline"]) if "outline" in shape else None)
     W = img.size[0]
     for item, src, dst, box, bg, fg, weight, left, right, size_en in jobs:
         if not dst:
@@ -166,6 +182,8 @@ def render(name, layout, en, ja):
         margin = max(6, h // 3)
         if item.get("align") == "left":
             avail = right - x - margin
+        elif item.get("align") == "right":
+            avail = x + w - left - margin
         else:
             cx = x + w / 2
             avail = 2 * min(cx - left, right - cx) - 2 * margin
@@ -177,9 +195,12 @@ def render(name, layout, en, ja):
             f = font(weight, size)
             tw, _ = text_size(draw, dst, f)
         cy = y + h / 2 + item.get("dy", 0)
-        tx = x if item.get("align") == "left" else x + w / 2 - tw / 2
+        tx = {"left": x, "right": x + w - tw}.get(item.get("align"), x + w / 2 - tw / 2)
         tx = max(4, min(tx + item.get("dx", 0), W - tw - 4))
         draw.text((tx, cy), dst, font=f, fill=fg, anchor="lm")
+        shift = round(tx + tw - (x + w)) + item.get("carry_dx", 0)
+        for (cx0, cy0, _, _), patch in item["_carry"]:
+            img.alpha_composite(patch, (cx0 + shift, cy0))
     OUT.mkdir(parents=True, exist_ok=True)
     img.save(OUT / f"{name}.png")
 

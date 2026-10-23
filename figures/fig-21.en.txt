@@ -1,20 +1,21 @@
 Desktop
 buildApp
 Search buildApp
-@® New »
-W Sort »
+New
+Sort
 View
-CB Details
+Details
 eee
 Name
 Date modified
 Type
 Size
-Glent
+Client
 6/24/2025 11:10 AM
 File folder
 Server
 6/24/2025 11:09 AM
 File folder
 Downloads
-© Documents
+Documents
+Desktop

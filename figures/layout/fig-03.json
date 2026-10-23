@@ -2,7 +2,7 @@
  "source": "fig-03.png",
  "page": 7,
  "width_pt": 386.0,
- "localize": false,
+ "localize": true,
  "items": [
   {
    "box": [
@@ -20,7 +20,16 @@
     74,
     21
    ],
-   "align": "center"
+   "align": "left",
+   "carry": [
+    [
+     510,
+     77,
+     447,
+     25
+    ]
+   ],
+   "scale": 1.12
   },
   {
    "box": [
@@ -42,12 +51,22 @@
   },
   {
    "box": [
-    22,
-    148,
-    90,
-    22
+    59,
+    154,
+    35,
+    13
    ],
-   "align": "center"
+   "align": "left",
+   "carry": [
+    [
+     104,
+     158,
+     8,
+     4
+    ]
+   ],
+   "carry_dx": -4,
+   "scale": 1.0
   },
   {
    "box": [
@@ -69,21 +88,41 @@
   },
   {
    "box": [
-    604,
-    151,
-    87,
-    18
+    641,
+    154,
+    31,
+    13
    ],
-   "align": "center"
+   "align": "left",
+   "carry": [
+    [
+     683,
+     158,
+     8,
+     4
+    ]
+   ],
+   "carry_dx": -4,
+   "scale": 1.0
   },
   {
    "box": [
     771,
     154,
-    56,
+    38,
     13
    ],
-   "align": "center"
+   "align": "left",
+   "carry": [
+    [
+     819,
+     158,
+     8,
+     4
+    ]
+   ],
+   "carry_dx": -4,
+   "scale": 1.0
   },
   {
    "box": [
@@ -101,7 +140,8 @@
     46,
     13
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -110,7 +150,8 @@
     111,
     14
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -119,16 +160,19 @@
     37,
     17
    ],
-   "align": "center"
+   "align": "left",
+   "dy": -2,
+   "scale": 1.12
   },
   {
    "box": [
-    46,
-    215,
-    78,
-    24
+    76,
+    221,
+    48,
+    13
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -146,7 +190,8 @@
     152,
     15
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -155,16 +200,18 @@
     77,
     14
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
-    46,
-    263,
-    82,
-    24
+    75,
+    268,
+    54,
+    19
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [

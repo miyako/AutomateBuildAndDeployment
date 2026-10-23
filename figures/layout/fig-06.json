@@ -2,7 +2,7 @@
  "source": "fig-06.png",
  "page": 12,
  "width_pt": 431.2,
- "localize": false,
+ "localize": true,
  "items": [
   {
    "box": [
@@ -11,7 +11,16 @@
     74,
     21
    ],
-   "align": "center"
+   "align": "left",
+   "carry": [
+    [
+     519,
+     87,
+     161,
+     25
+    ]
+   ],
+   "scale": 1.12
   },
   {
    "box": [
@@ -24,30 +33,60 @@
   },
   {
    "box": [
-    26,
-    154,
-    99,
-    31
+    67,
+    164,
+    35,
+    13
    ],
-   "align": "center"
+   "align": "left",
+   "carry": [
+    [
+     112,
+     168,
+     8,
+     4
+    ]
+   ],
+   "carry_dx": -4,
+   "scale": 1.0
   },
   {
    "box": [
-    612,
-    161,
-    87,
-    18
+    649,
+    164,
+    31,
+    13
    ],
-   "align": "center"
+   "align": "left",
+   "carry": [
+    [
+     691,
+     168,
+     8,
+     4
+    ]
+   ],
+   "carry_dx": -4,
+   "scale": 1.0
   },
   {
    "box": [
     779,
     164,
-    56,
+    38,
     13
    ],
-   "align": "center"
+   "align": "left",
+   "carry": [
+    [
+     827,
+     168,
+     8,
+     4
+    ]
+   ],
+   "carry_dx": -4,
+   "scale": 1.0
   },
   {
    "box": [
@@ -60,12 +99,13 @@
   },
   {
    "box": [
+    83,
+    221,
     54,
-    216,
-    82,
-    24
+    19
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -74,7 +114,8 @@
     46,
     13
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -83,7 +124,8 @@
     111,
     14
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -92,7 +134,9 @@
     37,
     17
    ],
-   "align": "center"
+   "align": "left",
+   "dy": -2,
+   "scale": 1.12
   },
   {
    "box": [
@@ -101,7 +145,8 @@
     30,
     13
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -128,7 +173,8 @@
     164,
     15
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -137,7 +183,8 @@
     77,
     14
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -155,7 +202,8 @@
     164,
     15
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
   },
   {
    "box": [
@@ -164,7 +212,18 @@
     77,
     14
    ],
-   "align": "center"
+   "align": "left",
+   "scale": 1.12
+  },
+  {
+   "box": [
+    84,
+    365,
+    66,
+    18
+   ],
+   "align": "left",
+   "scale": 1.12
   }
  ]
 }

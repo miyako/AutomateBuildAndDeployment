@@ -1,19 +1,19 @@
 Desktop
 builtStructure
-@® New »
-W Sort »
+New
+Sort
 View
-eee
-WR Gallery
+Gallery
 Name
 Date modified
 Type
 Size
-> Ba Soukaina - 4D
+Soukaina - 4D
 Resources
 6/19/2025 12:21 PM
 File folder
 myCompiledStructure.4DZ
 6/19/2025 12:21 PM
-ADZ File
+4DZ File
 15 KB
+Desktop

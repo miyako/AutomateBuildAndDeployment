@@ -18,13 +18,16 @@ description: Visually review and fix localised figures (diagram text overlays) u
 3. Fix by editing `figures/layout/fig-NN.json` → `items[N]` (N = 0-based line index), then `make figures` and
    `make review FIGS="NN"` again.
    - Overrides: `scale`, `size` (px), `weight` (`light`/`regular`/`bold`), `align` (`left`/`center`), `dx`, `dy`,
-     `box` `[x,y,w,h]` in image pixels, `bg`/`fg` `[r,g,b,a]`, `erase_pad`.
+     `box` `[x,y,w,h]` in image pixels, `bg`/`fg` `[r,g,b,a]`, `erase_pad`, `carry` (regions that follow the end of
+     the new text, e.g. chevrons) and `carry_dx`; per figure, `shapes` to redraw tabs or buttons wider.
    - If OCR merged two labels into one line: split the line in `fig-NN.<src>.txt` and `fig-NN.<tgt>.txt`, and give
      each new item an explicit `box`. Measure the boxes on the original image, e.g. crop it with PIL and view it.
    - To merge two lines into one label: put the full text on the first line, leave the second empty, and enlarge
      the first `box` if needed.
-4. Screenshots of the app UI (`"localize": false`): don't overlay text. Ask the user for a screenshot of the
-   localised app, save it as `figures/fig-NN-<tgt>.png` and set `"replace": "fig-NN-<tgt>.png"`.
+4. Screenshots of the app UI (`"localize": false`): by default don't overlay text. Ask the user for a screenshot of
+   the localised app, save it as `figures/fig-NN-<tgt>.png` and set `"replace": "fig-NN-<tgt>.png"`. If the user
+   asks for in-place replacement instead, use the official UI strings (e.g. from the app's XLIFF resources), and
+   confirm any uncertain label with the user.
 5. Finally, run `make` and spot-check the PDF pages with the changed figures: render them with pymupdf
    `page.get_pixmap(dpi=80)` and view.
 6. Commit with a message listing the figures that were changed.

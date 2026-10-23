@@ -1,5 +1,5 @@
-@® _demo-Build4D-Win-4D - [Method: host_startup]
-‘Gm File Edit Run Design Records Tools Method Window Help
+[Method: host_startup]
+File Edit Run Design Records Tools Method Window Help
 INN
 New
 Open
