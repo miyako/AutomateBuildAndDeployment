@@ -1,0 +1,56 @@
+{
+ "source": "fig-22.png",
+ "page": 24,
+ "width_pt": 414.8,
+ "localize": true,
+ "items": [
+  {
+   "box": [
+    46,
+    5,
+    161,
+    18
+   ],
+   "align": "center"
+  },
+  {
+   "box": [
+    14,
+    43,
+    203,
+    18
+   ],
+   "align": "left",
+   "size": 17
+  },
+  {
+   "box": [
+    98,
+    140,
+    93,
+    24
+   ],
+   "align": "left",
+   "dx": 4,
+   "scale": 1.12
+  },
+  {
+   "box": [
+    151,
+    261,
+    74,
+    18
+   ],
+   "align": "center"
+  },
+  {
+   "box": [
+    251,
+    328,
+    154,
+    19
+   ],
+   "align": "center"
+  }
+ ]
+}

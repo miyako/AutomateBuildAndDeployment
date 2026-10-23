@@ -1,0 +1,8 @@
+33)
+// Create the client application
+34
+//$build:=cs.Build4D.Client.new ($settings)
+38)
+36
+$success:=$build. build()
+Q7

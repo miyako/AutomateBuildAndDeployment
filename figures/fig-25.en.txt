@@ -1,0 +1,15 @@
+Compile 4D Project
+Q Filter workflow runs
+compile yml
+5 workflow runs
+Branch
+Event +
+Status ¥
+Actor +
+This workflow has a workflow_dispatch event trigger.
+Run workflow >
+@ commenting instantiation of the build client
+minute ago
+main
+© 34s
+Compile 4D Project #6: Commit 58af92b pushed by Soukaina-bachikh

@@ -1,0 +1,27 @@
+fry Settings
+<> Code
+© Issues,
+31 Pull requests
+© Actions
+Projects
+© Security Insights
+€ Compile 4D Project
+© add a typo for triggering compiling error #4
+Re-run jobs
+a Summary
+Triggered via push 1 hour ago
+Status
+Total duration
+Artifacts
+Soukaina-bachikh pushed -o- e7d2686 main
+Failure
+33s
+Jobs
+© compile
+Run details
+compile.yml
+on: push
+© Usage
+) Workflow file
+© compile
+29s

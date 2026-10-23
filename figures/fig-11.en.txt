@@ -1,0 +1,5 @@
+IPS C:\Users\Admin\actions-runner\actions-runner> ./run.cmd
+1 file(s) copied.
+Connected to GitHub
+Current runner version:
+@9:31:52Z: Listening for Jobs

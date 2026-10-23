@@ -1,0 +1,5 @@
+serverApp-clientApp
+ファイル　 編集　 モード　 ヘルプ
+アプリケーション
+clientApp
+Hello Build4D !

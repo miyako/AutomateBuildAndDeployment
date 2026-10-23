@@ -1,0 +1,9 @@
+Build Application
+Application Name:
+Destination Folder:
+"demo-Build4D-Win_Build" in volume "C:"
+Compiled structure
+Application
+Client/Server
+Plugins & components
+Licenses & Certificate

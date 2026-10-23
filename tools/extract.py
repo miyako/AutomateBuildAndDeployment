@@ -19,6 +19,8 @@ from pathlib import Path
 
 import pymupdf
 
+import pdfclip
+
 import config
 
 ROOT = config.ROOT
@@ -40,7 +42,41 @@ def write(path: Path, text: str, force: bool):
     print(f"wrote: {path.relative_to(ROOT)}")
 
 
+def page_images(page):
+    """Images on the page: visible (clip-aware) bbox, placement and, if enabled, the overlay clip."""
+    figcfg = CFG["figures"]
+    placed = pdfclip.image_rects(page)
+    if len(placed) != len(page.get_image_info()):  # e.g. images inside form XObjects: no clip info
+        placed = [(i["xref"], pymupdf.Rect(i["bbox"]), pymupdf.Rect(i["bbox"]))
+                  for i in page.get_image_info(xrefs=True)]
+    out = []
+    for xref, full, visible in placed:
+        if visible.is_empty or visible.width < figcfg["min_width_pt"]:
+            continue  # hidden, or an inline icon
+        clip = overlay_clip(page, visible) if figcfg["rasterize_overlays"] else None
+        out.append({"xref": xref, "placed": full, "visible": visible, "clip": clip})
+    return out
+
+
+def overlay_clip(page, visible):
+    """Region covering an image plus the boxes/labels drawn over it, or None if there are none."""
+    clip, found = pymupdf.Rect(visible), False
+    for d in page.get_drawings():
+        r = d["rect"]
+        if (d.get("color") and r.intersects(visible) and (r & visible).get_area() >= 0.5 * r.get_area()
+                and r.get_area() < 0.8 * visible.get_area()):  # not a frame around the whole picture
+            clip |= r; found = True
+    for b in page.get_text("dict")["blocks"]:
+        for l in b.get("lines", []):
+            if (visible + (-1, -1, 1, 1)).contains(pymupdf.Rect(l["bbox"])) and \
+                    "".join(s["text"] for s in l["spans"]).strip():
+                found = True
+    return (clip + (-2, -2, 2, 2)) if found else None
+
+
 def line_items(page):
+    images = page_images(page)
+    overlay_boxes = [im["visible"] + (-1, -1, 1, 1) for im in images if im["clip"]]
     items = []
     for b in page.get_text("dict")["blocks"]:
         if b["type"] != 0:
@@ -50,12 +86,14 @@ def line_items(page):
             x0, y0, x1, y1 = l["bbox"]
             if y0 > CFG["footer_y"] or y0 < CFG["header_y"]:  # running header/footer
                 continue
+            if any(r.contains(pymupdf.Rect(l["bbox"])) for r in overlay_boxes):
+                continue  # text drawn over an image: kept in the rasterised figure
             items.append({"kind": "line", "x": round(x0), "y0": y0, "y1": y1, "x1": x1,
                           "spans": spans, "text": "".join(s["text"] for s in spans)})
-    for info in page.get_image_info(xrefs=True):
-        x0, y0, x1, y1 = info["bbox"]
-        items.append({"kind": "image", "y0": y0, "y1": y1, "xref": info["xref"],
-                      "width_pt": x1 - x0})
+    for im in images:
+        v = im["visible"]
+        items.append({"kind": "image", "y0": v.y0, "y1": v.y1, "xref": im["xref"],
+                      "width_pt": (im["clip"] or v).width, "image": im})
     items.sort(key=lambda it: (it["y0"], it.get("x", 0)))
     return items
 
@@ -68,9 +106,21 @@ def is_code_font(span):
     return any(f in font_of(span) for f in CODE_FONTS)
 
 
+def is_code_span(span):
+    return span["color"] in CODE_COLORS or is_code_font(span)
+
+
+def is_all_code(item):
+    """Every visible span is code; a code-font blank line counts too (blank lines inside code blocks)."""
+    spans = [s for s in item["spans"] if s["text"].strip()] or item["spans"]
+    return bool(spans) and all(is_code_span(s) for s in spans)
+
+
 def is_code_line(item, body_x):
-    if any((s["color"] in CODE_COLORS or is_code_font(s)) and s["text"].strip() for s in item["spans"]):
+    if any(is_code_span(s) and s["text"].strip() for s in item["spans"]):
         return True
+    if CFG["code"]["indent"] is None:  # code is recognised by font/colour only
+        return False
     return item["x"] >= body_x + CFG["code"]["indent"]
 
 
@@ -183,7 +233,8 @@ def extract_body(doc):
         for it in line_items(doc[pno]):
             if it["kind"] == "image":
                 flush_all()
-                figures.append({"page": pno + 1, "xref": it["xref"], "width_pt": it["width_pt"]})
+                figures.append({"page": pno + 1, "xref": it["xref"], "width_pt": it["width_pt"],
+                                "image": it["image"]})
                 out.append(f"![](fig-{len(figures):02d})\n")
                 prev = None
                 continue
@@ -192,7 +243,8 @@ def extract_body(doc):
             size = round(max(s["size"] for s in it["spans"]))
 
             if not text.strip():
-                if state["code"] and it["x"] >= body_x + CFG["code"]["indent"]:
+                indent = CFG["code"]["indent"]
+                if state["code"] and (is_all_code(it) or (indent is not None and it["x"] >= body_x + indent)):
                     state["code"].append(it)
                 else:
                     flush_code()
@@ -238,13 +290,13 @@ def extract_body(doc):
                 prev = it
                 continue
 
-            if state["in_bullet"] and it["x"] > body_x and not any(
+            if state["in_bullet"] and it["x"] > body_x and not is_all_code(it) and not any(
                     s["color"] in CODE_COLORS for s in it["spans"]):
                 state["bullets"][-1].append(inline_md(it["spans"]))
                 prev = it
                 continue
 
-            if it["x"] != body_x and is_code_line(it, body_x):
+            if is_all_code(it) or (it["x"] != body_x and is_code_line(it, body_x)):
                 flush_para(); flush_bullets()
                 state["code"].append(it)
                 prev = it
@@ -294,11 +346,23 @@ def extract_figures(doc, figures, force):
     for n, fig in enumerate(figures, 1):
         name = f"fig-{n:02d}"
         png = figdir / f"{name}.png"
+        page = doc[fig["page"] - 1]
+        im = fig["image"]
         if force or not png.exists():
             pix = pymupdf.Pixmap(doc, fig["xref"])
             smask = doc.xref_get_key(fig["xref"], "SMask")
             if smask[0] == "xref":
                 pix = pymupdf.Pixmap(pix, pymupdf.Pixmap(doc, int(smask[1].split()[0])))
+            zoom = pix.width / im["placed"].width
+            if im["clip"]:  # render the page region so boxes/labels drawn over the image are kept
+                pix = page.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom), clip=im["clip"], alpha=False)
+                print(f"{name}: rasterised page {fig['page']} region with overlays")
+            elif max(abs(a - b) for a, b in zip(im["visible"], im["placed"])) > 1:  # cropped in the document
+                v, p0 = im["visible"], im["placed"]
+                box = (round((v.x0 - p0.x0) * zoom), round((v.y0 - p0.y0) * zoom),
+                       round((v.x1 - p0.x0) * zoom), round((v.y1 - p0.y0) * zoom))
+                pix = pymupdf.Pixmap(pix, pix.width, pix.height, pymupdf.IRect(box))
+                print(f"{name}: cropped to the visible part on page {fig['page']}")
             pix.save(png)
             print(f"wrote: {png.relative_to(ROOT)}")
         layout_path = figdir / "layout" / f"{name}.json"

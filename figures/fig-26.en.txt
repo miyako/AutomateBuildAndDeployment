@@ -1,0 +1,35 @@
+build
+Q Search logs
+failed 10 minutes ago in 23s
+Y @ Check build result
+>» Run $content = Get-Content build_output.txt -Raw
+21
+6Y,, Tool4D Build Output:
+22
+23
+ae.. Starting Build Process
+24
+25
+8! Running buildclient..
+26
+27
+toolad.4DRT [-10716] Object or Collection Expected
+(task=-1, taskName=Main task)
+28
+29
+30
+31
+BE Build did not complete successfully
+32
+oY,, Full Build Log:
+33
+34
+ae.. Starting Build Process
+35
+36
+Running buildclient...
+37
+38
+[-10716] Object or Collection Expected
+(task=-1, taskName=Main task)
+239

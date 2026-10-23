@@ -1,0 +1,38 @@
+{
+	"methods": {
+		"onStartup": {
+			"timeStamp": "2025-06-24T09:07:00Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "capable"
+			}
+		},
+		"quit4D_coop": {
+			"timeStamp": "2025-06-24T09:07:00Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "incapable"
+			}
+		},
+		"buildComponent": {
+			"timeStamp": "2025-06-24T09:07:00Z",
+			"attributes": {
+				"preemptive": "capable"
+			}
+		},
+		"showOnDisk_coop": {
+			"timeStamp": "2025-06-24T09:07:00Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "incapable"
+			}
+		},
+		"onError": {
+			"timeStamp": "2025-06-24T09:07:00Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "capable"
+			}
+		}
+	}
+}

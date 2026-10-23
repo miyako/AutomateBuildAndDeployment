@@ -1,0 +1,23 @@
+[Method: host_startup]
+File Edit Run Design Records Tools Method Window Help
+INN
+New
+Open
+Explorer
+Tool Box
+Structure
+Compiler
+Find in design
+Data
+Tables
+Query
+Tools
+Execute
+MSC
+Settings
+2
+No tag
+Build4D !")
+2
+3 8
+typo:>

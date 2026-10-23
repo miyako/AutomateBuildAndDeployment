@@ -39,12 +39,14 @@ The workflow and checkpoints are in `AGENTS.md`. This file is a technical refere
 | `heading.fonts` | Substrings of font names that mark headings; with `heading.min_size` |
 | `heading.levels_by_x` | `{"x": level}`: heading level by left x (nearest within 6 pt); otherwise `default_level` |
 | `code.colors` | Hex colours of syntax-highlighted code spans (Word exports code as coloured text) |
-| `code.fonts` | Monospace font substrings; `code.indent` = minimum x offset for code continuation lines |
+| `code.fonts` | Monospace font substrings; `code.indent` = minimum x offset for code continuation lines (`null`: code is recognised by font/colour only, for documents whose code sits at the body x) |
 | `bullets.fonts` / `strip_fonts` | Glyph fonts that mark list items / fonts of separator spans to drop |
 | `caption.italic`, `caption.min_x` | Captions are italic lines starting right of `min_x` |
 | `table.size` | Font size used only by table cells (or null) |
 | `paragraph.gap`, `short_line_x1` | Start a new paragraph after a vertical gap > `gap`, or after a short line ending in `.` or `:` |
 | `ocr.psm`, `min_conf`, `noise` | Tesseract page-segmentation mode, word confidence threshold, regex of junk lines |
+| `figures.min_width_pt` | Images narrower than this (inline emoji/icons) are not extracted as figures |
+| `figures.rasterize_overlays` | When boxes or text are drawn over a picture (red highlights, step numbers), render that page region instead of extracting the raw image; text inside it is dropped from the Markdown |
 | `figure_fonts` | `{light, regular, bold: ["path#index", ...]}`: overrides the per-platform defaults |
 
 `make inspect` derives most of these from a style histogram of the body pages:
@@ -73,6 +75,8 @@ monospace font for code instead of colours, `code.colors` can stay empty.
   `![caption](fig-NN)` placed where the image sits.
   - `layout/fig-NN.json` stores `source`, `page`, `width_pt` (the placed width, reused in the rebuild) and
     `localize`, plus one `items[]` entry per OCR line with its `box`.
+- Cropped pictures (Word crops with a clip path around a larger placement) are cut to their visible part;
+  `tools/pdfclip.py` tracks the clip in the page content stream.
 - Vector diagrams (drawn with PDF paths, not images) are **not** extracted. `inspect` lists pages with many
   drawings. If they contain text, ask the user: either rasterise the region with `page.get_pixmap(clip=…)` into a
   new figure, or leave it.
@@ -105,10 +109,16 @@ For each changed item:
 2. The foreground colour is sampled from the darkest differing pixels.
 3. The size comes from the original text height and width, then is clamped to the box.
 4. Similar sizes are snapped together, so labels of the same rank match.
-5. The text is drawn with the weight (`light`, `regular` or `bold`) and alignment (`center` or `left`).
+5. The text is drawn with the weight (`light`, `regular` or `bold`) and alignment (`center`, `left` or `right`).
 
-Overrides per item: `scale`, `size`, `weight`, `align`, `dx`, `dy`, `box`, `bg`, `fg`, `erase_pad`.
+Overrides per item: `scale`, `size`, `weight`, `align`, `dx`, `dy`, `box`, `bg`, `fg`, `erase_pad`, plus:
+- `carry: [[x,y,w,h], …]`: pixel regions (a dropdown chevron, a breadcrumb separator, the rest of a breadcrumb trail)
+  that move with the end of the new text, so a longer translation pushes them right instead of overlapping them
+- `carry_dx`: extra horizontal offset for the carried regions (negative to tighten the gap)
+
 Per figure:
+- `"shapes": [{"rect": [x,y,w,h], "fill": [r,g,b], "outline": [r,g,b]}, …]`: rectangles drawn after erasing and
+  before the text, to redraw simple UI chrome such as tabs that must widen for the translation
 - `"localize": false` copies the image unchanged (use it for screenshots)
 - `"replace": "fig-NN-<tgt>.png"` uses a ready-made image from `figures/`, keeping `width_pt`
 
@@ -117,6 +127,9 @@ Typical fixes:
 - The erase removes legend dots or arrows next to text: shift the box (`dx`, or a narrower `box`) and use `align: left`.
 - A title came out too small: `scale: 1.3`.
 - Text runs outside its shape: shorten the translation (preferred), or use `size`.
+- A UI label pushes into the chevron or separator after it: `carry` that region.
+- Tabs or buttons too narrow for the translation: redraw them wider with `shapes` and place the labels in the new
+  rectangles (sample the fill and outline colours from the original).
 - Figures that show sample data (field names, values) may need edits that match the demo, e.g. new
   `name<TGT>` fields.
 

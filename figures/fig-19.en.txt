@@ -1,0 +1,29 @@
+Q Filter workflow runs
+Actions
+“1
+Build 4D Project
+buildyml
+All workflows.
+2 workflow runs
+Event »
+Status
+Branch
+Actor +
+Compile 4D Project
+This workflow has a workflow_dispatch event trigger.
+Run workflow
+Management
+2 Use workflow from
+& Caches
+@ Build 4D Project
+© Attestations
+main
+Branch: mai
+Build 4D Project #2: Manually run by Soukaina-bachikh
+Runners
+@ Usage metrics
+@ Build 4D Project
+main
+Build 4D Project #1: Manually run by Soukaina-bachikh
+© 1m 49s
+©@ Performance metrics
